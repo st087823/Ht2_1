@@ -117,6 +117,7 @@ int* function_4(int* arr, size_t size) {
 	return arr;
 }
 
+
 int main()
 {
 	setlocale(LC_ALL, "Russian");
