@@ -36,12 +36,12 @@ int* function_1(int* arr, size_t size) {
 }
 
 void function_3(int* arr, size_t size) {
-	int max = -1000;
+	int max = -1000; int max_p;
 	cout << "Максимум массива:  " << endl;
 	for (int p = 0; p < size; p++) {
-		if (arr[p] > max) { max = arr[p]; }
+		if (arr[p] > max) { max = arr[p]; max_p = p; }
 	}
-	cout << max << endl;
+	cout << max_p << endl;
 	getchar(); getchar();
 }
 
