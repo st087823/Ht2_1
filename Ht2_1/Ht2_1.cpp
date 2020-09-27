@@ -1,8 +1,19 @@
 #include <iostream>
 #include <math.h>
 #include <conio.h> // для getch
+#include <cstdlib> // system("pause");
 #define N 1000
 using namespace std;
+
+void meny() {
+	cout << "0 - Выйти из программы" << endl;
+	cout << "1 - Добавить элемент массива" << endl;
+	cout << "2 - Вывести массив на экран" << endl;
+	cout << "3 - Вывести максимум массива" << endl;
+	cout << "4 - Вывести минимум массива" << endl;
+	cout << "5 - Вывести сумму эл-ов массива" << endl;
+	cout << "6 - Вывести массив в обратн. порядке" << endl;
+}
 
 void function_2(int* arr, size_t size) {
 
@@ -11,13 +22,7 @@ void function_2(int* arr, size_t size) {
 	{
 		cout << arr[i] << "  ";
 	}
-	getchar(); getchar();
-	cout << endl;
-}
-
-int function_0(int r) {
-	int t = 0;
-	return t;
+	system("pause");
 }
 
 int* function_1(int* arr, size_t size) {
@@ -36,23 +41,26 @@ int* function_1(int* arr, size_t size) {
 }
 
 void function_3(int* arr, size_t size) {
-	int max = -1000; int max_p;
+	int max = -1000;
+	int max_p = 0;
+	int p = 0;
 	cout << "Максимум массива:  " << endl;
 	for (int p = 0; p < size; p++) {
 		if (arr[p] > max) { max = arr[p]; max_p = p; }
 	}
 	cout << max_p << endl;
-	getchar(); getchar();
+	system("pause");
 }
 
 void function_4(int* arr, size_t size) {
 	int min = 1000;
+	int p = 0;
 	cout << "Минимум массива:  " << endl;
-	for (int p = 0; p < size; p++) {
+	for (p = 0; p < size; p++) {
 		if (min > arr[p]) { min = arr[p]; }
 	}
 	cout << min << endl;
-	getchar(); getchar();
+	system("pause");
 }
 
 void function_5(int* arr, size_t size) {
@@ -62,7 +70,7 @@ void function_5(int* arr, size_t size) {
 		sum = sum + arr[p];
 	}
 	cout << sum << endl;
-	getchar(); getchar();
+	system("pause");
 }
 
 void function_6(int* arr, size_t size) {
@@ -73,7 +81,7 @@ void function_6(int* arr, size_t size) {
 		cout << arr[i] << "  ";
 	}
 	cout << endl;
-	getchar(); getchar();
+	system("pause");
 }
 
 int main()
@@ -83,21 +91,14 @@ int main()
 	int n = 0;
 	int* A = new int[N];
 
-
 	n = 0;
 	int t = 1;
 	while (t != 0) {
 		system("cls");
-		cout << "0 - Выйти из программы" << endl;
-		cout << "1 - Добавить элемент массива" << endl;
-		cout << "2 - Вывести массив на экран" << endl;
-		cout << "3 - Вывести максимум массива" << endl;
-		cout << "4 - Вывести минимум массива" << endl;
-		cout << "5 - Вывести сумму эл-ов массива" << endl;
-		cout << "6 - Вывести массив в обратн. порядке" << endl;
+		meny();
 		cin >> x;
 
-		if (x == 0) { t = function_0(t); }
+		if (x == 0) { t = 1; }
 		if (x == 1) { A = function_1(A, n); n++; }
 		if (x == 2) { function_2(A, n); }
 		if (x == 3) { function_3(A, n); }
