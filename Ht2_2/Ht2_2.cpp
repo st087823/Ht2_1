@@ -133,7 +133,6 @@ int main()
 	int c = 0;
 	int* A = new int[N];
 
-	n = 0;
 	int t = 1;
 	while (t != 0) {
 		system("cls");
