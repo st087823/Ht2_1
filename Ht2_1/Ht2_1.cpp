@@ -16,8 +16,6 @@ void meny() {
 }
 
 void function_2(int* arr, size_t size) {
-
-	cout << "Массив:  ";
 	for (int i = 0; i < size; i++)
 	{
 		cout << arr[i] << "  ";
@@ -25,11 +23,7 @@ void function_2(int* arr, size_t size) {
 	system("pause");
 }
 
-int* function_1(int* arr, size_t size) {
-	int a;
-	cout << "Введите число, которое необходимо добавить" << endl;
-	cin >> a;
-
+void function_1(int* &arr, int& size, int a) {
 	if (size == 0) {
 		arr[0] = a;
 		size++;
@@ -37,75 +31,92 @@ int* function_1(int* arr, size_t size) {
 	else {
 		arr[size] = a; size++;
 	}
-	return arr;
 }
 
-void function_3(int* arr, size_t size) {
+int function_3(int* arr, int size) {
 	int max = -1000;
 	int max_p = 0;
 	int p = 0;
-	cout << "Максимум массива:  " << endl;
 	for (int p = 0; p < size; p++) {
 		if (arr[p] > max) { max = arr[p]; max_p = p; }
-	}
-	cout << max_p << endl;
-	system("pause");
+	} 
+	return max_p;
 }
 
-void function_4(int* arr, size_t size) {
+int function_4(int* arr, int size) {
 	int min = 1000;
 	int p = 0;
-	cout << "Минимум массива:  " << endl;
 	for (p = 0; p < size; p++) {
 		if (min > arr[p]) { min = arr[p]; }
 	}
-	cout << min << endl;
-	system("pause");
+	return min;
 }
 
-void function_5(int* arr, size_t size) {
+int function_5(int* arr, int size) {
 	int sum = 0;
-	cout << "Сумма массива:  " << endl;
 	for (int p = 0; p < size; p++) {
 		sum = sum + arr[p];
 	}
-	cout << sum << endl;
-	system("pause");
+	return sum;
 }
 
-void function_6(int* arr, size_t size) {
-
-	cout << "Массив:  ";
+void function_6(int* arr, int size) {
 	for (int i = (size - 1); i >= 0; i--)
 	{
 		cout << arr[i] << "  ";
 	}
-	cout << endl;
-	system("pause");
+}
+
+void check(int* &A, int& n, int x) {
+
+	if (x == 1) {
+		int a;
+		cout << "Введите число, которое необходимо добавить" << endl;
+		cin >> a;
+		function_1(A, n, a);
+	}
+	if (x == 2) {
+		cout << "Массив:  ";
+		function_2(A, n);
+		cout << endl;
+	}
+	if (x == 3) {
+		int max_p = 0;
+		cout << "Номер максимального элемента массива:  " << endl;
+		cout << function_3(A, n) << endl;
+		system("pause");
+	}
+	if (x == 4) {
+		int min = 0;
+		cout << "Минимум массива:  " << endl;
+		cout << function_4(A, n) << endl;
+		system("pause");
+	}
+	if (x == 5) {
+		int sum = 0;
+		cout << "Сумма массива:  " << endl;
+		cout << function_5(A, n) << endl;
+		system("pause");
+	}
+	if (x == 6) {
+		cout << "Массив:  ";
+		function_6(A, n);
+		cout << endl;
+		system("pause");
+	}
 }
 
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	int x = 0;
+	int x = 1;
 	int n = 0;
 	int* A = new int[N];
-
-	n = 0;
-	int t = 1;
-	while (t != 0) {
+	while (x != 0) {
 		system("cls");
 		meny();
 		cin >> x;
-
-		if (x == 0) { t = 1; }
-		if (x == 1) { A = function_1(A, n); n++; }
-		if (x == 2) { function_2(A, n); }
-		if (x == 3) { function_3(A, n); }
-		if (x == 4) { function_4(A, n); }
-		if (x == 5) { function_5(A, n); }
-		if (x == 6) { function_6(A, n); }
-		cout << endl;
+		check(A, n, x);
 	}
 
 	delete[] A;

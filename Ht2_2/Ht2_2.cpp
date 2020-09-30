@@ -15,41 +15,24 @@ void meny() {
 	cout << "7 - Вывести массив" << endl;
 }
 
-void function_7(int* arr, size_t size) { // Вывести массив
-
-	cout << "Массив:  ";
+void function_7(int* arr, int size) { // Вывести массив
 	for (int i = 0; i < size; i++)
 	{
 		cout << arr[i] << "  ";
 	}
-	system("pause");
 }
 
-int function_0() { // Выйти из программы
-	int t = 0;
-	return t;
-}
-
-int* function_1(int* arr, size_t size, int numb_rand) { // Добавить рандомные числа
-	int a = 0;
-	int b = 0;
-	int r = 0;
+void function_1(int* &arr, int& size, int numb_rand, int a, int b) { // Добавить рандомные числа
 	int new_size = size + numb_rand;
-	cout << "В каком промежутке необходимо рандомить числа?" << endl;
-	cin >> a >> b;
-	while (size <= new_size) {
-		r = rand() % (b - a + 1) + a;
-		arr[size] = r;
+	while (size < new_size) {
+		arr[size] = rand() % (b - a + 1) + a;
 		size++;
 	}
-	system("pause");
-	return arr;
 }
 
-int* function_2(int* arr, size_t size) { // Перевернуть массив
+void function_2(int*& arr, int size) { // Перевернуть массив
 	int temp = 0;
 	int i = 0;
-	//while (size - 1 >= 0) {
 	while (i < size) {
 		temp = arr[(size - 1)];
 		arr[(size - 1)] = arr[i];
@@ -57,12 +40,9 @@ int* function_2(int* arr, size_t size) { // Перевернуть массив
 		i++;
 		size--;
 	}
-	//arr[i] = arr[size - 1];
-	system("pause");
-	return arr;
 }
 
-int* function_3(int* arr, size_t size) { // Поменять попарно элементы
+void function_3(int*& arr, int size) { // Поменять попарно элементы
 	int i = 0;
 	int temp = 0;
 	if (size % 2 == 0) {
@@ -81,21 +61,16 @@ int* function_3(int* arr, size_t size) { // Поменять попарно элементы
 			i += 2;
 		}
 	}
-	system("pause");
-	return arr;
 }
 
-int* function_5(int* arr, size_t size) { // Развернуть две половинки массива
-	int numb_middle = 0;
+void function_5(int*& arr, int size, int numb_middle) { // Развернуть две половинки массива
 	int i = 0;
 	int temp = 0;
 	
-	cout << "Введите индекс элемента, который разделит массив на две части?" << endl;
-	cin >> numb_middle;
 	int numb_middle_l = numb_middle - 1;;
 	int numb_middle_r = numb_middle + 1;
 
-	while (i < numb_middle_l) {
+	while (i <= numb_middle_l) {
 		temp = arr[i];
 		arr[i] = arr[numb_middle_l];
 		arr[numb_middle_l] = temp;
@@ -103,54 +78,63 @@ int* function_5(int* arr, size_t size) { // Развернуть две половинки массива
 		numb_middle_l--;
 	}
 	
-	while (numb_middle_r < size) {
+	while (size >= numb_middle_r) {
 		temp = arr[numb_middle_r];
 		arr[numb_middle_r] = arr[size - 1];
 		arr[size - 1] = temp;
 		numb_middle_r++;
 		size--;
 	}
-	system("pause");
-	return arr;
 }
 
-int* function_4(int* arr, size_t size) {
+void function_4(int*& arr, int size) {
 	int i = 0;
 	int temp = arr[size - 1];
 	for (int i = size - 1; i > 0; i--) {
 		arr[i] = arr[i - 1];
 	}
 	arr[0] = temp;
-	system("pause");
-	return arr;
+}
+
+void check(int*& A, int& n, int x) {
+	
+	if (x == 1) {
+		int c = 0;
+		cout << "Какое кол-во случайных чисел Вы хотите добавить?" << endl;
+		cin >> c;
+		int a = 0;
+		int b = 0;
+		cout << "В каком промежутке необходимо рандомить числа?" << endl;
+		cin >> a >> b;
+		function_1(A, n, c, a, b);
+	}
+	if (x == 2) { function_2(A, n); }
+	if (x == 3) { function_3(A, n); }
+	if (x == 4) { function_4(A, n); }
+	if (x == 5) {
+		int numb_middle = 0;
+		cout << "Введите индекс элемента, который разделит массив на две части?" << endl;
+		cin >> numb_middle;
+		function_5(A, n, numb_middle);
+	}
+	if (x == 7) {
+		cout << "Массив:  ";
+		function_7(A, n); 
+	}
 }
 
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	int x = 0;
+	int x = 1;
 	int n = 0;
-	int c = 0;
 	int* A = new int[N];
 
-	int t = 1;
-	while (t != 0) {
+	while (x != 0) {
 		system("cls");
 		meny();
 		cin >> x;
-
-		if (x == 0) { t = function_0(); }
-		if (x == 1) {
-			cout << "Какое кол-во случайных чисел Вы хотите добавить?" << endl;
-			cin >> c;
-			A = function_1(A, n, c);
-			n += c;
-		}
-		if (x == 2) { A = function_2(A, n); }
-		if (x == 3) { A = function_3(A, n); }
-		if (x == 4) { A = function_4(A, n); }
-		if (x == 5) { A = function_5(A, n); }
-		if (x == 7) { function_7(A, n); }
+		check(A, n, x);
 	}
 
 	delete[] A;
