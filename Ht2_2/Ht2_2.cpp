@@ -45,21 +45,11 @@ void function_2(int*& arr, int size) { // Перевернуть массив
 void function_3(int*& arr, int size) { // Поменять попарно элементы
 	int i = 0;
 	int temp = 0;
-	if (size % 2 == 0) {
-		while (i + 1 < size) {
-			temp = arr[i];
-			arr[i] = arr[i + 1];
-			arr[i + 1] = temp;
-			i += 2;
-		}
-	}
-	else {
-		while (i + 1 < size-1) {
-			temp = arr[i];
-			arr[i] = arr[i + 1];
-			arr[i + 1] = temp;
-			i += 2;
-		}
+	while (i < (size/2)*2) {
+		temp = arr[i];
+		arr[i] = arr[i + 1];
+		arr[i + 1] = temp;
+		i += 2;
 	}
 }
 
